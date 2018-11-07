@@ -8,11 +8,11 @@ import java.util.Properties;
 
 
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class, Integer.class }) })//按需配置
-public class MybatisInterceptor implements Interceptor {
+public class MybatisInterceptor2 implements Interceptor {
  
 	@Override
     public Object intercept(Invocation invocation) throws Throwable {
-		System.out.println("mybatis拦截器1======");
+		System.out.println("mybatis拦截器2======");
 		return invocation.proceed();
 	}
  

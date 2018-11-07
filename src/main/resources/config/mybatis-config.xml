@@ -13,6 +13,11 @@
     <typeAliases>
         <package name="cn.bucheng.springmybatis.entity"/>
     </typeAliases>
+    
+    <plugins>
+        <plugin interceptor="cn.bucheng.springmybatis.plugin.MybatisInterceptor"></plugin>
+        <plugin interceptor="cn.bucheng.springmybatis.plugin.MybatisInterceptor2"></plugin>
+    </plugins>
 
     <environments default="development">
         <environment id="development">
