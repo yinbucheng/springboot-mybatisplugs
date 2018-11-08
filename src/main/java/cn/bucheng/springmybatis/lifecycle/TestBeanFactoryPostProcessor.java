@@ -10,7 +10,7 @@ import org.springframework.lang.Nullable;
  * @Author buchengyin
  * @Date 2018/11/8 9:51
  **/
-@Configuration
+//@Configuration
 public class TestBeanFactoryPostProcessor implements BeanPostProcessor {
 
     @Nullable

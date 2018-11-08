@@ -22,6 +22,6 @@ public class SpringMybatisApplication {
 //			definition.setBeanClassName();
 //			definition.setPrimary(true);
 //		}
-		System.out.println(datas.size());
+//		System.out.println(datas.size());
 	}
 }
