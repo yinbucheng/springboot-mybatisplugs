@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @author buchengyin
  * @Date 2018/11/7 22:53
  **/
-@Component
+//@Component
 public class KafkaConsumer {
 
     @KafkaListener(topics = "test_demo",groupId = "group1")
