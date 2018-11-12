@@ -1,5 +1,6 @@
 package cn.bucheng.springmybatis.lifecycle;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -10,6 +11,14 @@ import org.springframework.core.env.ConfigurableEnvironment;
  * @Date 2018/11/9 11:41
  **/
 public class SpringRunnerListenenerTest implements SpringApplicationRunListener {
+    private SpringApplication springApplication;
+    private String[] args;
+
+    public SpringRunnerListenenerTest(SpringApplication springApplication,String[] args){
+        this.springApplication =springApplication;
+        this.args =args;
+    }
+
     @Override
     public void starting() {
         System.out.println("------------------->starting");

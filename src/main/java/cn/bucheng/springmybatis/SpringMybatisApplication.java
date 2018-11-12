@@ -8,6 +8,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertySource;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 @SpringBootApplication
 @MapperScan(basePackages = {"cn.bucheng.springmybatis.mapper"})
+@ComponentScan(basePackages = "cn.bucheng.springmybatis")
 public class SpringMybatisApplication {
 
 	public static void main(String[] args)throws Exception {
