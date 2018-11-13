@@ -2,6 +2,7 @@ package cn.bucheng.springmybatis;
 
 import cn.bucheng.springmybatis.lifecycle.BeanFactoryUtils;
 import cn.bucheng.springmybatis.lifecycle.EnviromentUtils;
+import cn.bucheng.springmybatis.lifecycle.FactoryBeanTest;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -24,6 +25,8 @@ public class SpringMybatisApplication {
 
 	public static void main(String[] args)throws Exception {
 		ApplicationContext applicationContext = SpringApplication.run(SpringMybatisApplication.class, args);
+//		FactoryBeanTest bean = applicationContext.getBean(FactoryBeanTest.class);
+//		System.out.println(bean);
 //		DefaultListableBeanFactory factory = (DefaultListableBeanFactory) BeanFactoryUtils.getBeanFactory();
 //		try {
 //			Field field = DefaultListableBeanFactory.class.getDeclaredField("allBeanNamesByType");
@@ -35,6 +38,10 @@ public class SpringMybatisApplication {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
+//		getPropertySources();
+	}
+
+	private static void getPropertySources() throws NoSuchFieldException, IllegalAccessException {
 		AbstractEnvironment environment = (AbstractEnvironment) EnviromentUtils.getEnvironment();
 		Field field = AbstractEnvironment.class.getDeclaredField("propertySources");
 		field.setAccessible(true);
