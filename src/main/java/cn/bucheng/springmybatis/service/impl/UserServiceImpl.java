@@ -23,6 +23,9 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public List<User> listAll() {
-        return userMapper.listAll();
+        User user = new User();
+        user.setName("test%");
+        user.setAge(10);
+        return userMapper.listAll(user);
     }
 }

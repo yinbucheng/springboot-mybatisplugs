@@ -5,7 +5,7 @@
         INSERT  INTO  yinchong.t_user(name,age) VALUES (#{name},#{age})
     </insert>
 
-    <select id="listAll" resultType="user">
-        select * from yinchong.t_user;
+    <select id="listAll" resultType="user" parameterType="user">
+        select * from yinchong.t_user where name like #{name} and age = #{age};
     </select>
 </mapper>

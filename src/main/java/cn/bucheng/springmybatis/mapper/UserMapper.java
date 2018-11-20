@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     int save(User user);
-    List<User> listAll();
+    List<User> listAll(User user);
 }

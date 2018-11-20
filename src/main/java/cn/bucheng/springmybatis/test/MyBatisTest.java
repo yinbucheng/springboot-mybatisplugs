@@ -19,7 +19,8 @@ public class MyBatisTest {
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             sqlSession = sqlSessionFactory.openSession();
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            List<User> userList = userMapper.listAll();
+
+            List<User> userList = userMapper.listAll(new User());
             System.out.println(userList);
         }catch (Exception e){
             throw new RuntimeException(e);
