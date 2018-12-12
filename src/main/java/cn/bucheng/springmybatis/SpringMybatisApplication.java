@@ -1,8 +1,12 @@
 package cn.bucheng.springmybatis;
 
+import cn.bucheng.springmybatis.config.BeanPostProcessorTest;
+import cn.bucheng.springmybatis.controller.KafkaController;
+import cn.bucheng.springmybatis.kafka.KafkaConsumer;
 import cn.bucheng.springmybatis.lifecycle.BeanFactoryUtils;
 import cn.bucheng.springmybatis.lifecycle.EnviromentUtils;
 import cn.bucheng.springmybatis.lifecycle.FactoryBeanTest;
+import cn.bucheng.springmybatis.service.impl.UserServiceImpl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -24,7 +28,8 @@ import java.util.Map;
 public class SpringMybatisApplication {
 
 	public static void main(String[] args)throws Exception {
-		SpringApplication.run(SpringMybatisApplication.class, args);
+		ApplicationContext context = SpringApplication.run(SpringMybatisApplication.class, args);
+		context.getBean(BeanPostProcessorTest.class);
 	}
 
 }

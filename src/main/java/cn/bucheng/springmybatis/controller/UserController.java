@@ -25,6 +25,7 @@ public class UserController {
 
     @RequestMapping("/testList")
     public Object testList(){
-        return userService.listAll();
+        throw new RuntimeException("error");
+//        return userService.listAll();
     }
 }
