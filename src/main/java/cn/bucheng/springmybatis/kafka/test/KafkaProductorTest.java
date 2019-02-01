@@ -10,7 +10,7 @@ public class KafkaProductorTest {
     public static void main(String[] args) throws InterruptedException {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "127.0.0.1:9092");
-        properties.put("metadata.broker.list", "localhost:9092");
+//        properties.put("metadata.broker.list", "localhost:9092");
 		/**
 		 * "key.serializer" 的类型根据ProducerRecord<Integer,String>中的类型来确定，
 		 * Integer对应的为IntegerSerializer,String对应的为StringSerializer
@@ -24,9 +24,11 @@ public class KafkaProductorTest {
 		 * 6为对应的key值
 		 * "hello"为对应的value值
 		 */
-        ProducerRecord<Integer,String> producerRecord = new ProducerRecord<>("test-topic", 6,"hello");
-        kafkaProducer.send(producerRecord);
-        Thread.sleep(1000);
+		for(int i=0;i<Integer.MAX_VALUE;i++) {
+            ProducerRecord<Integer, String> producerRecord = new ProducerRecord<>("test-topic2", i, "hello");
+            kafkaProducer.send(producerRecord);
+            Thread.sleep(10000);
+        }
         kafkaProducer.close();
         System.out.println("product end");
     }
