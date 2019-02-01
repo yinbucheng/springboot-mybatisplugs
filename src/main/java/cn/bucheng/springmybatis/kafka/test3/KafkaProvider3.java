@@ -21,9 +21,9 @@ public class KafkaProvider3 {
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         KafkaProducer kafkaProducer = new KafkaProducer(properties);
         for(int i=0;i<Integer.MAX_VALUE;i++) {
-            ProducerRecord<Integer, String> producerRecord = new ProducerRecord<>("test_topic2", i, "hello "+i);
+            ProducerRecord<Integer, String> producerRecord = new ProducerRecord<>("test_topic2", i, "hello_"+i);
             kafkaProducer.send(producerRecord);
-            System.out.println("------------------------>send message to kafka");
+            System.out.println("------------------------>send message to kafka,这是第"+(i+1)+"条信息");
             Thread.sleep(10000);
         }
         kafkaProducer.close();

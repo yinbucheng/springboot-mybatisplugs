@@ -13,11 +13,12 @@ import java.util.Properties;
  * @Date 2019/2/1 12:16
  * 采用手动提交
  **/
-public class KafkaConsumer3 {
+public class KafkaConsumer3_1 {
     public static void main(String[] args) {
         Properties props = new Properties();
         props.put("bootstrap.servers", "127.0.0.1:9092");
-        props.put("group.id", "hello-group2");
+        props.put("group.id", "hello-group3");
+        props.put("auto.offset.reset","earliest");
         props.put("enable.auto.commit", "false");
         props.put("auto.commit.interval.ms", "1000");
         props.put("session.timeout.ms", "30000");
@@ -30,8 +31,7 @@ public class KafkaConsumer3 {
             ConsumerRecords<Integer, String> records = consumer.poll(Duration.ofSeconds(1));
             if (!records.isEmpty()) {
                 for (ConsumerRecord<Integer, String> record : records) {
-//                    System.out.println("------------------>offset:" + record.offset() + " topic:" + record.topic() + " partition:" + record.partition() + " key:" + record.key() + " value:" + record.value());
-                    System.out.println("------------------>detail:"+record);
+                    System.out.println("------------------>detail3:"+record);
                     //提交offset
                     consumer.commitSync();
                 }
