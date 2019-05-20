@@ -1,0 +1,8 @@
+spring.application.name=bootstrap-mybatis
+server.port=8080
+spring.datasource.url =jdbc:mysql://127.0.0.1:3306/yinchong?serverTimezone=GMT%2B8
+spring.datasource.username =root
+spring.datasource.password =introcks1234
+spring.datasource.driver-class-name= com.mysql.jdbc.Driver
+mybatis.mapperLocations = classpath:mapper/*.xml
+mybatis.typeAliasesPackage =cn.bucheng.springmybatis.entity

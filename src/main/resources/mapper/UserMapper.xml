@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.bucheng.springmybatis.mapper.UserMapper" >
-    <insert id="save"  parameterType="user">
-        INSERT  INTO  yinchong.t_user(name,age) VALUES (#{name},#{age})
-    </insert>
-
-    <select id="listAll" resultType="user" parameterType="user">
-        select * from yinchong.t_user where name like #{name} and age = #{age};
-    </select>
+<mapper namespace="cn.bucheng.dao.UserMapper">
+   <select id="listPage" resultType="User" parameterType="string">
+       select * from t_user where name like #{name}
+   </select>
 </mapper>
