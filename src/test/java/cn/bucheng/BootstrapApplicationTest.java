@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -93,5 +94,18 @@ public class BootstrapApplicationTest {
         Wrapper<UserEntity> wrapper = new Condition().like("name","xiaoming%");
         userService.selectPage(page, wrapper);
         System.out.println(page);
+    }
+
+    @Test
+    public void testBatchSave(){
+        List<UserEntity> entities = new LinkedList<>();
+        for(int i=0;i<100;i++){
+            UserEntity entity = new UserEntity();
+            entities.add(entity);
+            entity.setGender("nv");
+            entity.setName("xiaoqian"+i);
+            entity.setAge(i);
+        }
+        userService.insertBatch(entities);
     }
 }
