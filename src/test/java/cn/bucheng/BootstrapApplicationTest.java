@@ -136,6 +136,7 @@ public class BootstrapApplicationTest {
         bulkRequestBuilder.execute().actionGet();
     }
 
+
     @Test
     public void filterQuery(){
 
