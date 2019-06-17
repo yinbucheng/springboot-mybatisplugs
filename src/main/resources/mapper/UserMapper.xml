@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.bucheng.dao.UserMapper">
-   <select id="listPage" resultType="User" parameterType="string">
+<mapper namespace="cn.bucheng.authmanager.dao.UserMapper">
+   <select id="listPage" resultType="UserPO" parameterType="string">
        select * from t_user where name like #{name}
    </select>
 </mapper>

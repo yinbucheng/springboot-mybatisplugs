@@ -1,8 +1,7 @@
-package cn.bucheng.dao;
+package cn.bucheng.authmanager.dao;
 
-import cn.bucheng.domain.UserEntity;
+import cn.bucheng.authmanager.model.po.UserPO;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Param;
@@ -14,7 +13,7 @@ import java.util.List;
  * @Author buchengyin
  * @Date 2019/5/20 9:10
  **/
-public interface UserMapper extends BaseMapper<UserEntity> {
+public interface UserMapper extends BaseMapper<UserPO> {
 
     List<User> listPage(Pagination page, @Param("name")String name);
 }

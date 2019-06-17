@@ -1,4 +1,4 @@
-package cn.bucheng.domain;
+package cn.bucheng.authmanager.model.po;
 
 
 import com.baomidou.mybatisplus.annotations.TableField;
@@ -10,13 +10,13 @@ import org.apache.ibatis.type.Alias;
 import java.io.Serializable;
 
 /**
- * @ClassName UserEntity
+ * @ClassName UserPO
  * @Author buchengyin
  * @Date 2019/5/20 9:03
  **/
-@Alias("User")
+@Alias("UserPO")
 @TableName("t_user")
-public class UserEntity implements Serializable {
+public class UserPO implements Serializable {
     @TableId(type= IdType.AUTO)
     private Long id;
     @TableField(value = "name")
@@ -68,7 +68,7 @@ public class UserEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "UserEntity{" +
+        return "UserPO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
