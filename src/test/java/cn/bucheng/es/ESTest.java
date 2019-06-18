@@ -1,4 +1,4 @@
-package cn.bucheng;
+package cn.bucheng.es;
 
 import org.apache.lucene.search.Query;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -49,6 +49,7 @@ public class ESTest {
         this.client = client.addTransportAddress(node);
     }
 
+
     @Test
     public void batchInsetEs() throws IOException {
         BulkRequestBuilder bulkRequestBuilder = client.prepareBulk();
@@ -59,7 +60,6 @@ public class ESTest {
         XContentBuilder contentBuilder2 = XContentFactory.jsonBuilder().startObject().field("name", "mysql高级开发").field("name", "大神")
                 .field("push_date", "2017-6-23").endObject();
         bulkRequestBuilder.add(client.prepareIndex("book", "english").setSource(contentBuilder2));
-//
         bulkRequestBuilder.execute().actionGet();
     }
 
