@@ -120,21 +120,7 @@ public class BootstrapApplicationTest {
     @Autowired
     private TransportClient client;
 
-    @Test
-    public void batchInsetEs() throws IOException {
-        BulkRequestBuilder bulkRequestBuilder = client.prepareBulk();
-        for(int i=0;i<100;i++){
-            XContentBuilder content = XContentFactory.jsonBuilder()
-                    .startObject()
-                    .field("name", "test"+i)
-                    .field("age", 20+i)
-                    .field("date", "2016-6-23")
-                    .field("country","wuhang")
-                    .endObject();
-            bulkRequestBuilder.add(client.prepareIndex("people","man").setSource(content));
-        }
-        bulkRequestBuilder.execute().actionGet();
-    }
+
 
 
     @Test
