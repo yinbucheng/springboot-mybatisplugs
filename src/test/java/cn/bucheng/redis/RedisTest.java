@@ -24,6 +24,7 @@ public class RedisTest {
     public void before() {
         //连接本地的 Redis 服务
         jedis = new Jedis("localhost");
+        jedis.select(1);
     }
 
     @Test
@@ -141,6 +142,21 @@ public class RedisTest {
     public void testGetBit(){
         Boolean affect = jedis.getbit("login_user", 3);
         System.out.println(affect);
+    }
+
+    @Test
+    public void testBgSave(){
+        jedis.bgsave();
+    }
+
+    @Test
+    public void testSave(){
+        jedis.save();
+    }
+
+    @Test
+    public void testChangeDb(){
+        jedis.select(2);
     }
 
 
