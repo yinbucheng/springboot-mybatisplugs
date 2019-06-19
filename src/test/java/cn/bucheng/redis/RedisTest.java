@@ -127,4 +127,22 @@ public class RedisTest {
         }
     }
 
+    @Test
+    public void testSaveBit(){
+        jedis.setbit("login_user",3,true);
+    }
+
+    @Test
+    public void cancelBit(){
+        jedis.setbit("login_user",3,false);
+    }
+
+    @Test
+    public void testGetBit(){
+        Boolean affect = jedis.getbit("login_user", 3);
+        System.out.println(affect);
+    }
+
+
+
 }
