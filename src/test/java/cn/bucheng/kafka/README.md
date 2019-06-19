@@ -46,10 +46,20 @@ max.block.ms=xxx
 ## 消费者核心配置
 
 ````
+#配置是否自动提交
+enable.auto.commit=xxx
+
+#配置自动提交的间隔
+auto.commit.interval.ms=xxx
+
+#配置消费者在服务器未找到偏移量的策略
+auto.offset.reset=xxx (earliest从头开始)
+
 ````
 
 ### 架构图
 
+生产者发送消息到broker的架构
 ![image](https://raw.githubusercontent.com/yinbucheng/mypic/master/640.png)
 
 ## 常见问题
