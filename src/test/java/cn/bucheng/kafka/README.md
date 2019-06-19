@@ -48,10 +48,13 @@ max.block.ms=xxx
 ````
 ````
 
+### 架构图
+
+![image](https://raw.githubusercontent.com/yinbucheng/mypic/master/640.png)
+
 ## 常见问题
 ```
 1. kafka生产者只需send().get()方法获取元数据时会出现 TimeoutException: Failed to update metadata after 60 ms.
 修改为send(,callback)回调就没有这个问题
-
 
 ```
