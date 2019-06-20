@@ -18,3 +18,15 @@ select * from information_schema.innodb_locks
 show engine innodb status \G;
 
 ````
+
+## 架构
+
+整体架构图
+![image](https://github.com/yinbucheng/mypic/blob/master/mysql1.png?raw=true)
+
+mysql主备同步架构
+![image](https://github.com/yinbucheng/mypic/blob/master/mysql2.png?raw=true)
+
+mysql开启binlog提交事务流程
+![image](https://github.com/yinbucheng/mypic/blob/master/mysql4.png?raw=true)
+
