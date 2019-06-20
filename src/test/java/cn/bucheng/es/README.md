@@ -29,6 +29,9 @@
 
 #原理讲解
 
+es所有原理
+![image](https://github.com/yinbucheng/mypic/blob/master/es.png?raw=true)
+
 es写入原理
 ![image](https://github.com/yinbucheng/mypic/blob/master/es1.png?raw=true)
 
