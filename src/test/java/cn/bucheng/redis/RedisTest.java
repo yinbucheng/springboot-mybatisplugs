@@ -35,8 +35,8 @@ public class RedisTest {
 
     @Test
     public void testBatchSave() {
-        for (int i = 0; i < 10000; i++) {
-            jedis.set("name" + i, i + "test");
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            jedis.set("test_name_test" + i, i + "test");
         }
     }
 
