@@ -8,6 +8,7 @@ import redis.clients.jedis.ScanResult;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author ：yinchong
@@ -38,6 +39,12 @@ public class RedisTest {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
             jedis.set("test_name_test" + i, i + "test");
         }
+    }
+
+    @Test
+    public void testKeys(){
+        Set<String> keys = jedis.keys("test_name*");
+        System.out.println(keys.size());
     }
 
 
