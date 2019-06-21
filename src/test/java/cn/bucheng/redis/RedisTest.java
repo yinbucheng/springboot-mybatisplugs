@@ -255,4 +255,17 @@ public class RedisTest {
         System.out.println(bitcount);
     }
 
+
+    // 0和任何数进行异或都是 那个数
+    // 任何数和自己本身异或 都是0
+    @Test
+    public void testXorOperation(){
+        int[] datas = new int[]{2,2,3,4,4,8,9,8,9,4,4,3,4};
+        int temp =0;
+        for(int i=0;i<datas.length;i++){
+            temp = temp^datas[i];
+        }
+        System.out.println(temp);
+    }
+
 }
