@@ -6,6 +6,7 @@ import ch.ethz.ssh2.StreamGobbler;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.stream.Stream;
 
 /**
  * @author ：yinchong

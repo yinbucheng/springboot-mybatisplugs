@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -123,8 +124,4 @@ public class BootstrapApplicationTest {
 
 
 
-    @Test
-    public void filterQuery(){
-
-    }
 }

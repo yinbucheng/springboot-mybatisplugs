@@ -180,6 +180,19 @@ public class RedisTest {
     }
 
     @Test
+    public void testNotKey(){
+        jedis.bitop(BitOP.NOT,"testNot","test1");
+    }
+
+
+    @Test
+    public void testXorKey(){
+        jedis.bitop(BitOP.XOR, "testXor", "test1", "test1");
+    }
+
+
+
+    @Test
     public void testGetAndBitMap(){
         testBitmap("testAnd");
     }
@@ -214,6 +227,8 @@ public class RedisTest {
 
     @Test
     public void testAllBit(){
+        testBitmap("testXor");
+        testBitmap("testNot");
         testBitmap("test1");
         testBitmap("test2");
         testBitmap("testAnd");
