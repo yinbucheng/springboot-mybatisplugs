@@ -2,7 +2,10 @@
 
 ## 三次握手及四次挥手
 
+![image](https://github.com/yinbucheng/mypic/blob/master/tcp1.jpeg?raw=true)
 
+
+![image](https://github.com/yinbucheng/mypic/blob/master/tcp2.jpeg?raw=true)
 
 
 ## 常见问题
