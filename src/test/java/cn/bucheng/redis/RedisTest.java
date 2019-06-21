@@ -181,30 +181,12 @@ public class RedisTest {
 
     @Test
     public void testGetAndBitMap(){
-        StringBuilder builder = new StringBuilder();
-        for(int i=0;i<100;i++) {
-            Boolean testAnd = jedis.getbit("testAnd", i);
-            if(testAnd){
-                builder.append("1");
-                continue;
-            }
-            builder.append("0");
-        }
-        System.out.println(builder);
+        testBitmap("testAnd");
     }
 
     @Test
     public void testGetOrBitMap(){
-        StringBuilder builder = new StringBuilder();
-        for(int i=0;i<100;i++) {
-            Boolean testAnd = jedis.getbit("testOr", i);
-            if(testAnd){
-                builder.append("1");
-                continue;
-            }
-            builder.append("0");
-        }
-        System.out.println(builder);
+       testBitmap("testOr");
     }
 
     @Test
@@ -219,6 +201,14 @@ public class RedisTest {
         for(int i=0;i<100;i++){
             jedis.setbit("test2",i, new Random().nextBoolean());
         }
+    }
+
+    @Test
+    public void testCountBit(){
+        testCountBit("test1");
+        testCountBit("test2");
+        testCountBit("testAnd");
+        testCountBit("testOr");
     }
 
 
@@ -242,6 +232,12 @@ public class RedisTest {
             builder.append("0");
         }
         System.out.println(builder);
+    }
+
+
+    private void testCountBit(String key){
+        Long bitcount = jedis.bitcount(key);
+        System.out.println(bitcount);
     }
 
 }
