@@ -2,12 +2,14 @@ package cn.bucheng.redis;
 
 import org.junit.Before;
 import org.junit.Test;
+import redis.clients.jedis.BitOP;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ScanParams;
 import redis.clients.jedis.ScanResult;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -167,5 +169,79 @@ public class RedisTest {
     }
 
 
+    @Test
+    public void testAndKey(){
+       jedis.bitop(BitOP.AND,"testAnd","test1","test2");
+    }
+
+    @Test
+    public void testOrKey(){
+        jedis.bitop(BitOP.OR,"testOr","test1","test2");
+    }
+
+    @Test
+    public void testGetAndBitMap(){
+        StringBuilder builder = new StringBuilder();
+        for(int i=0;i<100;i++) {
+            Boolean testAnd = jedis.getbit("testAnd", i);
+            if(testAnd){
+                builder.append("1");
+                continue;
+            }
+            builder.append("0");
+        }
+        System.out.println(builder);
+    }
+
+    @Test
+    public void testGetOrBitMap(){
+        StringBuilder builder = new StringBuilder();
+        for(int i=0;i<100;i++) {
+            Boolean testAnd = jedis.getbit("testOr", i);
+            if(testAnd){
+                builder.append("1");
+                continue;
+            }
+            builder.append("0");
+        }
+        System.out.println(builder);
+    }
+
+    @Test
+    public void testSaveBitTest1(){
+        for(int i=0;i<100;i++){
+            jedis.setbit("test1",i, new Random().nextBoolean());
+        }
+    }
+
+    @Test
+    public void testSaveBitTest2(){
+        for(int i=0;i<100;i++){
+            jedis.setbit("test2",i, new Random().nextBoolean());
+        }
+    }
+
+
+    @Test
+    public void testAllBit(){
+        testBitmap("test1");
+        testBitmap("test2");
+        testBitmap("testAnd");
+        testBitmap("testOr");
+    }
+
+
+    private void testBitmap(String key){
+        StringBuilder builder = new StringBuilder();
+        for(int i=0;i<100;i++) {
+            Boolean testAnd = jedis.getbit(key, i);
+            if(testAnd){
+                builder.append("1");
+                continue;
+            }
+            builder.append("0");
+        }
+        System.out.println(builder);
+    }
 
 }
