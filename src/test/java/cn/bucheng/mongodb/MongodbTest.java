@@ -1,10 +1,10 @@
 package cn.bucheng.mongodb;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,27 +19,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MongodbTest {
 
     @Autowired
-    private MongoClient mongo;
+    private MongoClient client;
 
     @Before
     public void init(){
-        mongo =  new MongoClient("localhost",27017);
+        client =  new MongoClient("localhost",27017);
     }
 
 
     @Test
     public void testCreateDatabase(){
-        mongo.getDatabase("test");
+        client.getDatabase("test");
     }
 
     @Test
     public void testCreateCollection(){
-        mongo.getDatabase("test").createCollection("book");
+        client.getDatabase("test").createCollection("book");
     }
 
     @Test
     public void testFindCollection(){
-        FindIterable<Document> documents = mongo.getDatabase("test").getCollection("book").find();
+        FindIterable<Document> documents = client.getDatabase("test").getCollection("book").find();
     }
 
     @Test
@@ -48,6 +48,20 @@ public class MongodbTest {
         document.put("name","yinbucheng");
         document.put("age",20);
         document.put("gender","nan");
-        mongo.getDatabase("test").getCollection("book").insertOne(document);
+        client.getDatabase("test").getCollection("book").insertOne(document);
     }
+
+    @Test
+    public void testUpdate(){
+        Bson eq = Filters.eq("name", "yinchong");
+        Document document = new Document("$set", new Document("age", 30));
+        client.getDatabase("test").getCollection("book").updateMany(eq,document);
+    }
+
+    @Test
+    public void testDelete(){
+        client.getDatabase("test").getCollection("book").deleteMany(Filters.eq("name","yinchong"));
+    }
+
+
 }
