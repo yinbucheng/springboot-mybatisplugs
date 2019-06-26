@@ -1,11 +1,11 @@
 package cn.bucheng.springboot;
 
+import cn.bucheng.springboot.annotest.Bean;
 import cn.bucheng.springboot.aop.customer.AspectAfterMethod;
 import cn.bucheng.springboot.aop.customer.AspectBeforeMethod;
 import cn.bucheng.springboot.ioc.ClassPathBeaDefinitionScanner;
 import cn.bucheng.springboot.test.Animal;
 import cn.bucheng.springboot.test.Cat;
-import org.aopalliance.intercept.Joinpoint;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Test;
@@ -106,5 +106,17 @@ public class SimpleBootTest {
         proxyFactory.addAdvice(before1);
         Animal proxy = (Animal) proxyFactory.getProxy();
         proxy.eat("fish");
+    }
+
+
+    @Test
+    public void testConditionOnMissBean(){
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.scan("cn.bucheng.springboot.annotest");
+        context.refresh();
+        String[] beanNamesForType = context.getBeanNamesForType(Object.class);
+        System.out.println(beanNamesForType.length);
+        Bean bean = context.getBean(Bean.class);
+        bean.test();
     }
 }
