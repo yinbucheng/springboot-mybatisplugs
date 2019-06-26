@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @modified By：
  * @version:
  */
-@Component
+//@Component
 @ConditionalOnMissingBean(Bean.class)
 public class BeanOne implements Bean {
     @Override
