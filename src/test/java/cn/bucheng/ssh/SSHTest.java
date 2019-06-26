@@ -1,4 +1,4 @@
-package cn.bucheng;
+package cn.bucheng.ssh;
 
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;

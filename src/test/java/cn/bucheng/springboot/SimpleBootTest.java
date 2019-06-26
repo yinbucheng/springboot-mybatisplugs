@@ -1,0 +1,68 @@
+package cn.bucheng.springboot;
+
+import cn.bucheng.springboot.ioc.ClassPathBeaDefinitionScanner;
+import cn.bucheng.springboot.test.Animal;
+import cn.bucheng.springboot.test.Cat;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+import org.junit.Test;
+import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.framework.ProxyFactoryBean;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.Set;
+
+/**
+ * @author ：yinchong
+ * @create ：2019/6/26 16:10
+ * @description：检测测试
+ * @modified By：
+ * @version:
+ */
+public class SimpleBootTest {
+
+    //扫描制定包名下面内容测试
+    @Test
+    public void testScannerBeanDefinition() {
+        ClassPathBeaDefinitionScanner scanner = new ClassPathBeaDefinitionScanner();
+        Set<BeanDefinition> candidateComponents = scanner.findCandidateComponents("cn.bucheng.springboot.interfaces");
+        System.out.println(candidateComponents.size());
+        candidateComponents.forEach((param) -> {
+            System.out.println(param.getBeanClassName());
+            System.out.println(param.getScope());
+        });
+    }
+
+    //手动创建ioc容器测试
+    @Test
+    public void testCustomFactory() {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(beanFactory);
+        applicationContext.register(Cat.class);
+        applicationContext.refresh();
+        Cat bean = applicationContext.getBean(Cat.class);
+        System.out.println(bean.say());
+    }
+
+    @Test
+    public void testCustomAop() {
+        Animal animal = new Cat();
+        ProxyFactory proxyFactory = new ProxyFactory();
+        proxyFactory.addAdvice(new MethodInterceptor() {
+            @Override
+            public Object invoke(MethodInvocation invocation) throws Throwable {
+                try {
+                    System.out.println("----------------->aop before<--------------");
+                    return invocation.proceed();
+                } finally {
+                    System.out.println("---------------->aop after<--------------");
+                }
+            }
+        });
+        proxyFactory.setTarget(animal);
+        Animal proxy = (Animal) proxyFactory.getProxy();
+        System.out.println(proxy.say());
+    }
+}
