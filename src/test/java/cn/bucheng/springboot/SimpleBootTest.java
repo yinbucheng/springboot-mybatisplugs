@@ -95,7 +95,10 @@ public class SimpleBootTest {
 
             @Override
             public boolean match(Object target, Method method) {
-                return true;
+                if(method.getName().equals("eat")) {
+                    return true;
+                }
+                return false;
             }
         };
 
