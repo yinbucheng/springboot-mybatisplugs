@@ -9,15 +9,18 @@ import org.aopalliance.intercept.Joinpoint;
  * @modified By：
  * @version:
  */
-public abstract class AspectAroundMethod implements MethodInterceptor{
+public abstract class AspectAroundMethod implements MethodInterceptor, Match {
 
     public abstract Object around(Joinpoint joinpoint);
 
     @Override
     public Object invoke(Joinpoint joinPoint) {
         try {
-            return around(joinPoint);
-        }catch (Throwable throwable){
+            if (match(joinPoint)) {
+                return around(joinPoint);
+            }
+            return joinPoint.proceed();
+        } catch (Throwable throwable) {
             System.err.println(throwable);
             return null;
         }

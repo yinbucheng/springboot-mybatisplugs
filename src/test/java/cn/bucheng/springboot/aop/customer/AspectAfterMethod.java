@@ -9,7 +9,7 @@ import org.aopalliance.intercept.Joinpoint;
  * @modified By：
  * @version:
  */
-public abstract   class AspectAfterMethod implements MethodInterceptor {
+public abstract class AspectAfterMethod implements MethodInterceptor, Match {
 
     public abstract void after();
 
@@ -17,9 +17,11 @@ public abstract   class AspectAfterMethod implements MethodInterceptor {
     public Object invoke(Joinpoint joinPoint) {
         try {
             Object value = joinPoint.proceed();
-            after();
+            if (match(joinPoint)) {
+                after();
+            }
             return value;
-        }catch (Throwable t){
+        } catch (Throwable t) {
             System.err.println(t);
             return null;
         }

@@ -5,6 +5,7 @@ import cn.bucheng.springboot.aop.customer.AspectBeforeMethod;
 import cn.bucheng.springboot.ioc.ClassPathBeaDefinitionScanner;
 import cn.bucheng.springboot.test.Animal;
 import cn.bucheng.springboot.test.Cat;
+import org.aopalliance.intercept.Joinpoint;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Test;
@@ -68,7 +69,7 @@ public class SimpleBootTest {
     }
 
     @Test
-    public void testAopCustom(){
+    public void testAopCustom() {
         Animal animal = new Cat();
         cn.bucheng.springboot.aop.customer.ProxyFactory proxyFactory = new cn.bucheng.springboot.aop.customer.ProxyFactory();
         proxyFactory.setTarget(animal);
@@ -77,19 +78,29 @@ public class SimpleBootTest {
             public void before() {
                 System.out.println("============test1 before==========");
             }
-        };
 
-        AspectBeforeMethod before2 = new AspectBeforeMethod() {
             @Override
-            public void before() {
-                System.out.println("==========test2 before==========");
+            public boolean match(Joinpoint joinpoint) {
+                return true;
             }
         };
 
-        proxyFactory.addAdvice(before1);
-        proxyFactory.addAdvice(before2);
 
+        AspectAfterMethod after = new AspectAfterMethod() {
+            @Override
+            public void after() {
+                System.out.println("===========test1 after==========");
+            }
+
+            @Override
+            public boolean match(Joinpoint joinpoint) {
+                return true;
+            }
+        };
+
+        proxyFactory.addAdvice(after);
+        proxyFactory.addAdvice(before1);
         Animal proxy = (Animal) proxyFactory.getProxy();
-        System.out.println(proxy.say());
+        proxy.eat("fish");
     }
 }

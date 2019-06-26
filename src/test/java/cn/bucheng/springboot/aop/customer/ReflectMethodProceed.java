@@ -15,9 +15,13 @@ import java.util.List;
  * @version:
  */
 public class ReflectMethodProceed  implements Joinpoint {
+    //被调用目标对象上面方法
     private Method method;
+    //目标对象
     private Object target;
+    //调用方法上面参数
     private Object[] args;
+    //代理的列表
     private List<MethodInterceptor> advices = new LinkedList<>();
     private int index =0;
 
@@ -62,9 +66,11 @@ public class ReflectMethodProceed  implements Joinpoint {
 
     @Override
     public Object proceed() throws Throwable {
+        //如果当前不存在拦截器直接调用目标方法
         if(index==advices.size()){
             return method.invoke(target,args);
         }
+        //获取上面拦截器并将当前对象传入，递归调用
         return advices.get(index++).invoke(this);
     }
 
