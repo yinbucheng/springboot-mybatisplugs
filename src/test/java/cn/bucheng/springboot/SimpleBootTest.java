@@ -1,5 +1,7 @@
 package cn.bucheng.springboot;
 
+import cn.bucheng.springboot.aop.customer.AspectAfterMethod;
+import cn.bucheng.springboot.aop.customer.AspectBeforeMethod;
 import cn.bucheng.springboot.ioc.ClassPathBeaDefinitionScanner;
 import cn.bucheng.springboot.test.Animal;
 import cn.bucheng.springboot.test.Cat;
@@ -7,7 +9,6 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Test;
 import org.springframework.aop.framework.ProxyFactory;
-import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -62,6 +63,32 @@ public class SimpleBootTest {
             }
         });
         proxyFactory.setTarget(animal);
+        Animal proxy = (Animal) proxyFactory.getProxy();
+        System.out.println(proxy.say());
+    }
+
+    @Test
+    public void testAopCustom(){
+        Animal animal = new Cat();
+        cn.bucheng.springboot.aop.customer.ProxyFactory proxyFactory = new cn.bucheng.springboot.aop.customer.ProxyFactory();
+        proxyFactory.setTarget(animal);
+        AspectBeforeMethod before1 = new AspectBeforeMethod() {
+            @Override
+            public void before() {
+                System.out.println("============test1 before==========");
+            }
+        };
+
+        AspectBeforeMethod before2 = new AspectBeforeMethod() {
+            @Override
+            public void before() {
+                System.out.println("==========test2 before==========");
+            }
+        };
+
+        proxyFactory.addAdvice(before1);
+        proxyFactory.addAdvice(before2);
+
         Animal proxy = (Animal) proxyFactory.getProxy();
         System.out.println(proxy.say());
     }
