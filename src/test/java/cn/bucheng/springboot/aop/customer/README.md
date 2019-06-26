@@ -25,7 +25,7 @@ ReflectMethodProcced
 
 ```
 
-设计总结
+设计总结（这就是变异后的责任链）
 ```
 1.至少需要两个对象A,B
 2.A持有B对象(或者B对象列表)
@@ -33,12 +33,11 @@ ReflectMethodProcced
 4.A对象上面执行一段逻辑可能会调用B.b方法
 5.B对象上面b方法执行一段逻辑一定会调用A.a方法
 6.起始于A.a方法结束于A.a方法，中间可能会中转B.b方法
+
+
+A对象是个包装对象其会持有需要链式处理的对象（也就是责任对象）
 ```
 
-适用模式
-```
-1.责任链设计模式
 
-```
 
 ![image](https://github.com/yinbucheng/mypic/blob/master/aop2.png?raw=true)
