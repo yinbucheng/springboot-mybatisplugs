@@ -21,4 +21,24 @@ ReflectMethodProcced
   >>实现procced方法
   
 5.编写一个类实现InvocationHandler其内部创建上面的实现类  
+
+
 ```
+
+设计总结
+```
+1.至少需要两个对象A,B
+2.A持有B对象(或者B对象列表)
+3.B上面的b方法入参存在一个为A对象
+4.A对象上面执行一段逻辑可能会调用B.b方法
+5.B对象上面b方法执行一段逻辑一定会调用A.a方法
+6.起始于A.a方法结束于A.a方法，中间可能会中转B.b方法
+```
+
+适用模式
+```
+1.责任链设计模式
+
+```
+
+![image](https://github.com/yinbucheng/mypic/blob/master/aop2.png?raw=true)
