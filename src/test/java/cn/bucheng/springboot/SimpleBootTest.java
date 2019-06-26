@@ -14,6 +14,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.lang.reflect.Method;
 import java.util.Set;
 
 /**
@@ -80,7 +81,7 @@ public class SimpleBootTest {
             }
 
             @Override
-            public boolean match(Joinpoint joinpoint) {
+            public boolean match(Object object, Method method) {
                 return true;
             }
         };
@@ -93,7 +94,7 @@ public class SimpleBootTest {
             }
 
             @Override
-            public boolean match(Joinpoint joinpoint) {
+            public boolean match(Object target, Method method) {
                 return true;
             }
         };

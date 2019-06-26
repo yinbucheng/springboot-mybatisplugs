@@ -71,7 +71,7 @@ public class ReflectMethodProceed  implements Joinpoint {
             return method.invoke(target,args);
         }
         //获取上面拦截器并将当前对象传入，递归调用
-        return advices.get(index++).invoke(this);
+        return advices.get(index++).invoke(this,method);
     }
 
     @Override

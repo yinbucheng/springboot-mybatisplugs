@@ -1,8 +1,8 @@
 package cn.bucheng.springboot.aop.customer;
 
-import org.aopalliance.intercept.Joinpoint;
+import java.lang.reflect.Method;
 
 public interface Match {
 
-    boolean match(Joinpoint joinpoint);
+    boolean match(Object target, Method method);
 }
