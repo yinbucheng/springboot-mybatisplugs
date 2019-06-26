@@ -12,10 +12,15 @@ spring:
     elasticsearch:
       cluster-name: elasticsearch #默认即为 elasticsearch
       cluster-nodes: 127.0.0.1:9300
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/test
+      username: ""
+      password: ""
   redis:
     host: 127.0.0.1
     pool: 5
     password: ""
+
 
 
 
