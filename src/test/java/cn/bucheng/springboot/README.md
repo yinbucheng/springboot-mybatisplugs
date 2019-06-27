@@ -1,0 +1,36 @@
+# springboot
+
+
+核心类
+```
+ioc相关：
+DefaultListableBeanFactory
+AnnotationConfigApplicationContext
+AnnotatedBeanDefinitionReader
+ClassPathBeanDefinitionScanner
+ConfigurationClassPostProcessor
+
+
+aop相关：
+AnnotationAwareAspectJAutoProxyCreator
+AbstractBeanFactoryPointcutAdvisor
+MethodIntercptor
+ProxyFactory
+ReflectiveMethodInvocation
+
+
+
+事务相关：
+TransactionInterceptor
+BeanFactoryTransactionAttributeSourceAdvisor
+ProxyTransactionManagementConfiguration
+```
+
+讲解(IOC)
+```
+DefaultListableBeanFactory 是ioc容器用来存放对象的数据结构及实例
+AnnotationConfigApplicationContext 上下文对象用于收集对象存放到ioc容器等一些列操作
+ClassPathBeanDefinitionScanner 类路径扫描器用于收集项目下面的对象（其内部分为非jar形式和jar形式收集）
+AnnotatedBeanDefinitionReader  1.注册内置BeanPostProcessor 2.注册内置的BeanFactoryPostProcessor(比如ConfigurationClassPostProcessor)   2.注册相关的BeanDefinition
+ConfigurationClassPostProcessor ioc收集入口，其会解析springioc中对象比如@Configuration等同时会调用ClassPathBeanDefinitionScanner
+```
