@@ -1,6 +1,10 @@
 package cn.bucheng.springboot;
 
-import cn.bucheng.springboot.annotest.Bean;
+import cn.bucheng.springboot.annotest.bean.Bean;
+import cn.bucheng.springboot.annotest.config.ConditionOnBeanConfig;
+import cn.bucheng.springboot.annotest.config.ConditionOnClassConfig;
+import cn.bucheng.springboot.annotest.config.ConditionOnMissClassConfig;
+import cn.bucheng.springboot.annotest.config.ConditionOnMissBeanConfig;
 import cn.bucheng.springboot.aop.customer.AspectAfterMethod;
 import cn.bucheng.springboot.aop.customer.AspectBeforeMethod;
 import cn.bucheng.springboot.ioc.ClassPathBeaDefinitionScanner;
@@ -112,11 +116,51 @@ public class SimpleBootTest {
     @Test
     public void testConditionOnMissBean(){
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.scan("cn.bucheng.springboot.annotest");
+        context.scan("cn.bucheng.springboot.annotest.bean");
+        context.register(ConditionOnMissBeanConfig.class);
         context.refresh();
         String[] beanNamesForType = context.getBeanNamesForType(Object.class);
         System.out.println(beanNamesForType.length);
         Bean bean = context.getBean(Bean.class);
         bean.test();
     }
+
+    @Test
+    public void testConditionOnBean(){
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.scan("cn.bucheng.springboot.annotest.bean");
+        context.register(ConditionOnBeanConfig.class);
+        context.refresh();
+        String[] beanNamesForType = context.getBeanNamesForType(Object.class);
+        System.out.println(beanNamesForType.length);
+        Bean bean = context.getBean(Bean.class);
+        bean.test();
+    }
+
+    @Test
+    public void testConditionOnClass(){
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.scan("cn.bucheng.springboot.annotest.bean");
+        context.register(ConditionOnClassConfig.class);
+        context.refresh();
+        String[] beanNamesForType = context.getBeanNamesForType(Object.class);
+        System.out.println(beanNamesForType.length);
+        Bean bean = context.getBean(Bean.class);
+        bean.test();
+    }
+
+    @Test
+    public void testConditionOnMissClass(){
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.scan("cn.bucheng.springboot.annotest.bean");
+        context.register(ConditionOnMissClassConfig.class);
+        context.refresh();
+        String[] beanNamesForType = context.getBeanNamesForType(Object.class);
+        System.out.println(beanNamesForType.length);
+        Bean bean = context.getBean(Bean.class);
+        bean.test();
+    }
+
+
+
 }

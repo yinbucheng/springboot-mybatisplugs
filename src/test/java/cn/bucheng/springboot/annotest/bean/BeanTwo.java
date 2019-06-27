@@ -1,7 +1,4 @@
-package cn.bucheng.springboot.annotest;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.stereotype.Component;
+package cn.bucheng.springboot.annotest.bean;
 
 /**
  * @author ：yinchong
@@ -10,8 +7,6 @@ import org.springframework.stereotype.Component;
  * @modified By：
  * @version:
  */
-//@Component
-@ConditionalOnMissingBean(Bean.class)
 public class BeanTwo implements Bean {
     @Override
     public void test() {

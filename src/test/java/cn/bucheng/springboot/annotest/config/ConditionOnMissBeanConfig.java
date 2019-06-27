@@ -1,7 +1,9 @@
-package cn.bucheng.springboot.annotest;
+package cn.bucheng.springboot.annotest.config;
 
+import cn.bucheng.springboot.annotest.bean.Bean;
+import cn.bucheng.springboot.annotest.bean.BeanOne;
+import cn.bucheng.springboot.annotest.bean.BeanTwo;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author ：yinchong
@@ -10,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
  * @modified By：
  * @version:
  */
-@Configuration
-public class Config {
+//@Configuration
+public class ConditionOnMissBeanConfig {
      //测试发现，@ConditionOnMissingBean 只能在@Bean 注释的方法上使用，不能再@Component 注释的类上使用。
     @org.springframework.context.annotation.Bean
     @ConditionalOnMissingBean(Bean.class)
