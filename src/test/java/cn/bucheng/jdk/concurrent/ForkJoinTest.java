@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
@@ -24,7 +23,7 @@ public class ForkJoinTest {
         ForkJoinPool joinPool = new ForkJoinPool(10);
         List<Integer> params = new LinkedList<>();
         for(int i=0;i<10000;i++){
-            params.add(new Random().nextInt(1000));
+            params.add(1);
         }
         long startTime = System.currentTimeMillis();
         BatchCalculate calculate = new BatchCalculate(params);
