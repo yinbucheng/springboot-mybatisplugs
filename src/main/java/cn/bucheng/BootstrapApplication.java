@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
+import javax.servlet.http.HttpServletRequest;
+
 @SpringBootApplication
 @MapperScan(basePackages = {"cn.bucheng.authmanager.dao"})
 @Import(FdfsClientConfig.class)

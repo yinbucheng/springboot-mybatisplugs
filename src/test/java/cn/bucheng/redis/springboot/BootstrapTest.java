@@ -34,7 +34,7 @@ public class BootstrapTest {
 
     @Test
     public void testSave() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000000; i++) {
             Order order = new Order();
             order.setOrderId((long) i);
             order.setBuyerMessage("这是一条测试" + i);
@@ -49,6 +49,13 @@ public class BootstrapTest {
             order.setStatus("完成");
             order.setPaymentType("支付宝支付");
             cacheDao.save(order);
+            if(i%100==0){
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

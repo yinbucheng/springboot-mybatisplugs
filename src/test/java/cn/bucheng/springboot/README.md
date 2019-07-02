@@ -17,6 +17,7 @@ AbstractBeanFactoryPointcutAdvisor
 MethodIntercptor
 ProxyFactory
 ReflectiveMethodInvocation
+ApplicationContextAwareProcessor
 
 
 
@@ -33,4 +34,10 @@ AnnotationConfigApplicationContext 上下文对象用于收集对象存放到ioc
 ClassPathBeanDefinitionScanner 类路径扫描器用于收集项目下面的对象（其内部分为非jar形式和jar形式收集）
 AnnotatedBeanDefinitionReader  1.注册内置BeanPostProcessor(AutowiredAnnotationBeanPostProcessor) 2.注册内置的BeanFactoryPostProcessor(比如ConfigurationClassPostProcessor)   2.注册相关的BeanDefinition
 ConfigurationClassPostProcessor ioc收集入口，其会解析springioc中对象比如@Configuration等同时会调用ClassPathBeanDefinitionScanner
+```
+
+
+springboot中ApplicationContext分析
+```
+
 ```

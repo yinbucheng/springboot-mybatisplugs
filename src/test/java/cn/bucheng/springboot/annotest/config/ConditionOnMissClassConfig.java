@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @modified By：
  * @version:
  */
-@Configuration
+//@Configuration
 public class ConditionOnMissClassConfig {
 
     @ConditionalOnMissingClass("cn.intellif.Dispatcher")

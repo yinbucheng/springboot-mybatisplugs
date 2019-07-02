@@ -1,4 +1,4 @@
-package cn.bucheng.net;
+package cn.bucheng.net.jdk;
 
 import org.junit.Test;
 

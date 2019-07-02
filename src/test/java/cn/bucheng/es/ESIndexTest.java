@@ -47,4 +47,14 @@ public class ESIndexTest {
                 .addMapping("cmp", contentBuilder).get();
         System.out.println(createIndexResponse);
     }
+
+    @Test
+    public void testAliasIndex(){
+        client.admin().indices().prepareAliases().addAlias("people","test_people");
+    }
+
+    @Test
+    public void testRemoveAliases(){
+        client.admin().indices().prepareAliases().removeAlias("people","test_people");
+    }
 }
