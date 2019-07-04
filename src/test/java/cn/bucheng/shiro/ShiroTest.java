@@ -42,6 +42,29 @@ public class ShiroTest {
     }
 
     @Test
+    public void testSimplePermissionAndAuth(){
+        SimpleAccountRealm realm = new SimpleAccountRealm();
+        realm.addAccount("yinchong","123456");
+        realm.addRole("admin");
+        realm.addRole("user");
+        //构建SecurityManager环境
+        DefaultSecurityManager securityManager = new DefaultSecurityManager();
+        securityManager.setRealm(realm);
+        //主体提交让认证
+        SecurityUtils.setSecurityManager(securityManager);
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken("yinchong","1238456");
+        //登入
+        subject.login(token);
+        System.out.println(subject.isAuthenticated());
+
+
+        //登出
+        subject.logout();
+        System.out.println(subject.isAuthenticated());
+    }
+
+    @Test
     public void testTextShiro() {
         // 创建SecurityManager工厂。通过ini配置文件创建securityManager
         Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro/shiro-first.ini");
@@ -77,5 +100,26 @@ public class ShiroTest {
         // 是否认证通过
         isAuthenticated = subject.isAuthenticated();
         System.out.println("是否认证通过：" + isAuthenticated);
+    }
+
+
+    @Test
+    public void testCustomer(){
+        TestAuthorize realm = new TestAuthorize();
+        //构建SecurityManager环境
+        DefaultSecurityManager securityManager = new DefaultSecurityManager();
+        securityManager.setRealm(realm);
+        //主体提交让认证
+        SecurityUtils.setSecurityManager(securityManager);
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken("test","test");
+        //登入
+        subject.login(token);
+        System.out.println(subject.isAuthenticated());
+
+
+        //登出
+        subject.logout();
+        System.out.println(subject.isAuthenticated());
     }
 }
