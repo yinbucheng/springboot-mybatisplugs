@@ -16,7 +16,7 @@ public class BeanFactoryUtils implements ApplicationContextAware {
     private static  DefaultListableBeanFactory beanFactory;
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        System.out.println("----------->invoke ApplicationAware");
+        System.out.println("----------->invoke BeanFactoryUtils");
       beanFactory = (DefaultListableBeanFactory) applicationContext.getAutowireCapableBeanFactory();
     }
 

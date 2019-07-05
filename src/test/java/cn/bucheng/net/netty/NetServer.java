@@ -22,14 +22,14 @@ public class NetServer {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workGroup = new NioEventLoopGroup();
         ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(bossGroup,workGroup);
+        bootstrap.group(bossGroup, workGroup);
         bootstrap.channel(NioServerSocketChannel.class);
-        bootstrap.childOption(ChannelOption.SO_KEEPALIVE,true);
+        bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
 
         bootstrap.childHandler(new ChannelInitializer<NioSocketChannel>() {
             @Override
             protected void initChannel(NioSocketChannel socketChannel) throws Exception {
-                socketChannel.pipeline().addLast(new LengthFieldBasedFrameDecoder(1024,0,4,0,4));
+                socketChannel.pipeline().addLast(new LengthFieldBasedFrameDecoder(1024, 0, 4, 0, 4));
                 socketChannel.pipeline().addLast(new StringDecoder());
                 socketChannel.pipeline().addFirst(new StringEncoder());
                 socketChannel.pipeline().addFirst(new LengthFieldPrepender(4));
@@ -45,9 +45,10 @@ public class NetServer {
         });
 
         try {
-            ChannelFuture sync = bootstrap.bind(9090).sync();
-            System.out.println("------------->start server 9090");
-            sync.channel().closeFuture().sync();
+            ChannelFuture sync = bootstrap.bind(9097).sync();
+            System.out.println("------------->start server 9097");
+            Channel channel = sync.channel();
+            channel.closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

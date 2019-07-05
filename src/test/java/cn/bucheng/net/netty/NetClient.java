@@ -28,12 +28,12 @@ public class NetClient {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(workGroup);
         bootstrap.channel(NioSocketChannel.class);
-        bootstrap.option(ChannelOption.SO_KEEPALIVE,true);
+        bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
         bootstrap.handler(new ChannelInitializer<NioSocketChannel>() {
             @Override
             protected void initChannel(NioSocketChannel socketChannel) throws Exception {
-                socketChannel.pipeline().addLast(new IdleStateHandler(10,-1,-1,TimeUnit.SECONDS));
-                socketChannel.pipeline().addLast(new LengthFieldBasedFrameDecoder(1024,0,4,0,4));
+                socketChannel.pipeline().addLast(new IdleStateHandler(10, -1, -1, TimeUnit.SECONDS));
+                socketChannel.pipeline().addLast(new LengthFieldBasedFrameDecoder(1024, 0, 4, 0, 4));
                 socketChannel.pipeline().addLast(new StringDecoder());
                 socketChannel.pipeline().addFirst(new StringEncoder());
                 socketChannel.pipeline().addFirst(new LengthFieldPrepender(4));
@@ -52,7 +52,7 @@ public class NetClient {
                     @Override
                     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
                         IdleStateEvent event = (IdleStateEvent) evt;
-                        if(event.state()== IdleState.READER_IDLE){
+                        if (event.state() == IdleState.READER_IDLE) {
                             ctx.pipeline().writeAndFlush("PING");
                         }
                     }
@@ -66,9 +66,17 @@ public class NetClient {
         });
 
         try {
-            ChannelFuture sync = bootstrap.connect("127.0.0.1", 9090).sync();
+            ChannelFuture sync = bootstrap.connect("127.0.0.1", 9097).sync();
             System.out.println("client start");
-            sync.channel().closeFuture().sync();
+            sync.addListener(new ChannelFutureListener() {
+                @Override
+                public void operationComplete(ChannelFuture channelFuture) throws Exception {
+                    Channel channel = channelFuture.channel();
+                    channel.writeAndFlush("test ok");
+                }
+            });
+            Channel channel = sync.channel();
+            channel.closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
