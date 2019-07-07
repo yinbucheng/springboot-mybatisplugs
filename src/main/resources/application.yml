@@ -7,7 +7,7 @@ spring:
     data: classpath:db/data-h2.sql
     url: jdbc:mysql://127.0.0.1:3306/yinchong?serverTimezone=GMT%2B8
     username: root
-    password: introcks1234
+    password: 123456
   data:
     elasticsearch:
       cluster-name: elasticsearch #默认即为 elasticsearch
@@ -22,8 +22,11 @@ spring:
     password: ""
 
 
-
-
+#
+appid: wx8397f8696b538317
+partner: 1473426802
+partnerkey: 8A627A4578ACE384017C997F12D68B23
+notifyurl: http://a31ef7db.ngrok.io/WeChatPay/WeChatPayNotify
 
 # Logger Config
 logging:
