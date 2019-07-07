@@ -41,6 +41,11 @@ public class CatBootApplication {
         for(int i=0;i<100;i++){
             redisTemplate.opsForList().leftPush("miaosha_1","miaosha");
         }
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
