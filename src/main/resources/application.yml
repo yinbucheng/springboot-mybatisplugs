@@ -17,7 +17,7 @@ spring:
       username: ""
       password: ""
   redis:
-    host: 127.0.0.1
+    host: mongos-router-service.kube-system
     pool: 5
     password: ""
 

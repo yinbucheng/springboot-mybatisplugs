@@ -86,7 +86,6 @@ public class ESTest {
         System.out.println(indexResponse);
     }
 
-
     @Test
     public void query() {
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
@@ -105,6 +104,12 @@ public class ESTest {
             result.add(hit.getSourceAsMap());
         }
         System.out.println(result);
+    }
+
+
+    @Test
+    public void pageQuery(){
+//        client.prepareSearch("book").setTypes("english").setSearchType(SearchType.DFS_QUERY_THEN_FETCH).setQuery().
     }
 
 

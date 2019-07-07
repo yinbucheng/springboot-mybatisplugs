@@ -1,4 +1,4 @@
-package cn.bucheng.net;
+package cn.bucheng.net.jdk;
 
 import org.junit.Test;
 
@@ -59,14 +59,15 @@ public class NetIOTest {
 
     @Test
     public void testClient() throws Exception {
-        try (Socket client = new Socket()) {
-            client.bind(new InetSocketAddress(9008));
-            client.connect(new InetSocketAddress("127.0.0.1", 9090));
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-            writer.write("this is message from client");
-            writer.newLine();
-            writer.flush();
-            client.shutdownOutput();
+        for (int i = 0; i < 1000; i++) {
+            try (Socket client = new Socket()) {
+                client.connect(new InetSocketAddress("192.168.11.14", 8282));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+                writer.write("this is message from client");
+                writer.newLine();
+                writer.flush();
+                client.shutdownOutput();
+            }
         }
     }
 
@@ -84,7 +85,7 @@ public class NetIOTest {
         }
         socket.shutdownOutput();
         String line;
-        while((line=reader.readLine())!=null){
+        while ((line = reader.readLine()) != null) {
             System.out.println(line);
         }
         socket.close();
@@ -100,11 +101,11 @@ public class NetIOTest {
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
             String line;
-            while((line= reader.readLine())!=null){
+            while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
             for (int i = 0; i < 20; i++) {
-                writer.println("this message from server,this number is "+i);
+                writer.println("this message from server,this number is " + i);
                 writer.flush();
                 Thread.sleep(2000);
             }

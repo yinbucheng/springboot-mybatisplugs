@@ -22,6 +22,8 @@ public class Employee implements Serializable {
     private String about;
     @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String remark;
+    @Field(type = FieldType.Keyword)
+    private String telephone;
 
     public String getId() {
         return id;
@@ -71,6 +73,15 @@ public class Employee implements Serializable {
         this.remark = remark;
     }
 
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -80,6 +91,7 @@ public class Employee implements Serializable {
                 ", age=" + age +
                 ", about='" + about + '\'' +
                 ", remark='" + remark + '\'' +
+                ", telephone='" + telephone + '\'' +
                 '}';
     }
 }
