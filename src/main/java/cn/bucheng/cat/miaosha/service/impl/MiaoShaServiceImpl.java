@@ -23,16 +23,19 @@ public class MiaoShaServiceImpl implements MiaoShaService {
 
     @Override
     public boolean miaoSha(Long itemId, Long userId) {
-        Object temp = redisTemplate.opsForList().rightPop("miaosha_" + itemId);
-        if(null==temp){
-            System.out.println("--------->秒杀商品已经被抢完了<------------");
-            return false;
-        }
+
         Object o = redisTemplate.opsForValue().get("miaoshao_" + itemId + "_" + userId);
         if (null != o) {
             System.out.println("------------>请稍后再重试 " + userId + "<----------------");
             return false;
         }
+
+        Object temp = redisTemplate.opsForList().rightPop("miaosha_" + itemId);
+        if(null==temp){
+            System.out.println("--------->秒杀商品已经被抢完了<------------");
+            return false;
+        }
+
         redisTemplate.opsForValue().set("miaoshao_" + itemId + "_" + userId, "miaosha", 10, TimeUnit.SECONDS);
         String miaoShaSql = "update test.t_miaosha_item set number = number -1 where number>0 and item_id = " + itemId;
         String saveSql = "insert into test.t_miaosha_user(user_id,item_id)values(" + userId + "," + itemId + ")";
