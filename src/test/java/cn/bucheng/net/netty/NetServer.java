@@ -1,5 +1,6 @@
 package cn.bucheng.net.netty;
 
+import com.alibaba.fastjson.JSON;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -9,6 +10,8 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author ：yinchong
@@ -21,6 +24,8 @@ public class NetServer {
     public static void main(String[] args) {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workGroup = new NioEventLoopGroup();
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        try{
         ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(bossGroup, workGroup);
         bootstrap.channel(NioServerSocketChannel.class);
@@ -36,21 +41,29 @@ public class NetServer {
                 socketChannel.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
                     @Override
                     protected void channelRead0(ChannelHandlerContext ctx, String s) throws Exception {
-                        System.out.println(s);
-                        ctx.pipeline().writeAndFlush("test");
+                       if("PING".equals(s)){
+                           System.out.println(s);
+                           return;
+                       }
+
+                        BaseMessage baseMessage = JSON.parseObject(s, BaseMessage.class);
+                        System.out.println(baseMessage.getTital());
+                        System.out.println(baseMessage.getBody().length);
                     }
 
                 });
             }
         });
 
-        try {
-            ChannelFuture sync = bootstrap.bind(9097).sync();
+
+             bootstrap.bind(9097);
+             countDownLatch.await();
             System.out.println("------------->start server 9097");
-            Channel channel = sync.channel();
-            channel.closeFuture().sync();
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            workGroup.shutdownGracefully();
+            bossGroup.shutdownGracefully();
         }
 
     }

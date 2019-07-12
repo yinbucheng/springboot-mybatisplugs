@@ -1,10 +1,13 @@
 package cn.bucheng.springboot.web;
 
+import cn.bucheng.aware.ApplicationUtils;
 import cn.bucheng.aware.BeanFactoryUtils;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -31,13 +34,27 @@ public class WebBootApplicationTest {
         System.setProperty("es.set.netty.runtime.available.processors", "false");
     }
 
+    @Before
+    public void init(){
+        DispatcherServlet dispatcherServlet = BeanFactoryUtils.getBean(DispatcherServlet.class);
+        try {
+            Method onRefresh = DispatcherServlet.class.getDeclaredMethod("onRefresh", ApplicationContext.class);
+            onRefresh.setAccessible(true);
+            onRefresh.invoke(dispatcherServlet, ApplicationUtils.applicationContext);
+        } catch (NoSuchMethodException e) {
+            System.out.println(e);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
     @Test
     public void testWeb() {
         HttpServletRequest request = new MockHttpServletRequest();
         HttpServletResponse response = new MockHttpServletResponse();
         ((MockHttpServletRequest) request).setMethod("GET");
-        ((MockHttpServletRequest) request).setRequestURI("/test2");
+        ((MockHttpServletRequest) request).setRequestURI("/test");
         ((MockHttpServletRequest) request).setServletPath("/");
         DispatcherServlet dispatcherServlet = BeanFactoryUtils.getBean(DispatcherServlet.class);
         try {
