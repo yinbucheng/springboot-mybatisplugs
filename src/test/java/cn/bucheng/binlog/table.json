@@ -1,0 +1,20 @@
+{
+  "database": "",
+  "tables": [
+    {
+      "tableName": "",
+      "insert": {
+        "column": "name",
+        "column": "number"
+      },
+      "update": {
+        "column": "id",
+        "column": "name",
+        "column": "number"
+      },
+      "delete": {
+        "column": "id"
+      }
+    }
+  ]
+}

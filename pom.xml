@@ -223,6 +223,34 @@
             <version>2.1.1.RELEASE</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.shyiko</groupId>
+            <artifactId>mysql-binlog-connector-java</artifactId>
+            <version>0.18.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.flywaydb/flyway-core &ndash;&gt;-->
+        <!--<dependency>-->
+        <!--<groupId>org.flywaydb</groupId>-->
+        <!--<artifactId>flyway-core</artifactId>-->
+        <!--<version>5.2.4</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -255,6 +283,17 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!--<plugin>-->
+            <!--<groupId>org.flywaydb</groupId>-->
+            <!--<artifactId>flyway-maven-plugin</artifactId>-->
+            <!--<version>5.0.5</version>-->
+            <!--<configuration>-->
+            <!--<url>jdbc:mysql://hostname:port#/db_name</url>-->
+            <!--<user>username</user>-->
+            <!--<password>password</password>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 
